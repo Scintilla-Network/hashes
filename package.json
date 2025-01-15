@@ -1,0 +1,33 @@
+{
+  "name": "@scintilla-network/hashes",
+  "version": "1.0.0-beta.4",
+  "description": "Enhanced hash functions for scintilla and crypto / blockchain use",
+  "type": "module",
+  "main": "src/index.js",
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc",
+    "prepublishOnly": "npm run test"
+  },
+  "keywords": [
+    "crypto",
+    "hash",
+    "sha3",
+    "blake3",
+    "post-quantum"
+  ],
+  "author": "Scintilla Network",
+  "license": "MIT",
+  "dependencies": {
+    "@noble/hashes": "1.3.3"
+  },
+  "devDependencies": {
+    "vitest": "1.2.1"
+  }
+}
