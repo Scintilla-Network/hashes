@@ -1,7 +1,7 @@
 {
   "name": "@scintilla-network/hashes",
-  "version": "1.0.0-beta.4",
-  "description": "Enhanced hash functions for scintilla and crypto / blockchain use",
+  "version": "1.0.0-beta.5",
+  "description": "Enhanced hash functions for scintilla and broader crypto / blockchain use",
   "type": "module",
   "main": "src/index.js",
   "files": [
@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "test": "vitest run",
-    "test:watch": "vitest",
+    "test:watch": "vitest src/utils/bech32.spec.js",
     "typecheck": "tsc",
     "prepublishOnly": "npm run test"
   },
@@ -20,7 +20,14 @@
     "hash",
     "sha3",
     "blake3",
-    "post-quantum"
+    "post-quantum",
+    "scintilla",
+    "bech32",
+    "bech32m",
+    "hash160",
+    "ripemd160",
+    "sha256",
+    "sha512"
   ],
   "author": "Scintilla Network",
   "license": "MIT",

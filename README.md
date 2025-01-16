@@ -8,6 +8,7 @@ Provides both classical crypto hashes and quantum-resistant alternatives.
 - 🔒 Classic Crypto hash functions (SHA256, SHA512, RIPEMD160, BLAKE2) - Block hash
 - 🛡️ Quantum-resistant hash functions (SHA3, SHAKE, K12) - Post-quantum replacements
 - ⚡ High-performance alternatives (BLAKE3, TurboSHAKE)
+- 🏦 Blockchain utilities (Hash160, Bech32/Bech32m encoding)
 - 🔬 Audited code (uses noble-hashes library, fixed versions, audited by Scintilla Network)
 - 0️⃣ Zero dependencies beyond noble-hashes
 - 🎯 Flexible input handling (strings, hex, JSON, Uint8Array)
@@ -91,6 +92,26 @@ const turbo256Hash = turboshake256('message', 32);
 const hexHash = sha3_256('deadbeef');
 ```
 
+### Blockchain Utilities
+
+```javascript
+import { hash160, bech32, bech32m } from '@scintilla-network/hashes/utils';
+
+// Hash160 (RIPEMD160(SHA256())) - commonly used for addresses
+const pubKeyHash = hash160(publicKey);  // 20 bytes output
+
+// Bech32 address encoding (used in modern blockchains)
+const words = bech32.toWords(Array.from(pubKeyHash));
+const address = bech32.encode('sct', words);  // e.g., sct1qw508d6qejxtdg4y5r3zarvary0c5xw7k...
+
+// Bech32 address decoding
+const decoded = bech32.decode(address);
+const decodedHash = Buffer.from(bech32.fromWords(decoded.words));
+
+// Bech32m for newer address formats
+const bech32mAddress = bech32m.encode('sct', words);
+```
+
 ### Utility Functions
 
 ```javascript
@@ -100,7 +121,9 @@ import {
     fromUtf8, toUtf8,      // UTF-8 conversion
     fromJSON, toJSON,      // JSON conversion
     randomBytes,           // Random bytes
-    doubleSha256          // Bitcoin's double SHA256
+    doubleSha256,         // Bitcoin's double SHA256
+    hash160,              // RIPEMD160(SHA256())
+    bech32, bech32m       // Address encoding
 } from '@scintilla-network/hashes/utils';
 
 // Format messages (used internally by hash functions)
@@ -123,6 +146,8 @@ const jsonObj = toJSON(jsonBytes);          // Bytes to JSON
 // Other utilities
 const random = randomBytes(32);            // Random bytes
 const doubleHash = doubleSha256('message');  // Bitcoin's double SHA256
+const hash160Result = hash160(publicKey);    // Address hash
+const address = bech32.encode('prefix', words); // Address encoding
 ```
 
 ## Input Types

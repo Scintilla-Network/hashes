@@ -5,6 +5,8 @@ import { isHexString, isUint8Array } from './types.js';
 import { fromUtf8, toUtf8 } from './utf8.js';
 import { fromJSON, toJSON } from './json.js';
 import { formatMessage, formatMessageHash } from './format.js';
+import { bech32, bech32m } from './bech32.js';
+import { hash160 } from './hash160.js';
 
 // Re-export individual utilities
 export { 
@@ -19,7 +21,10 @@ export {
     fromUtf8,
     toUtf8,
     fromJSON,
-    toJSON
+    toJSON,
+    bech32,
+    bech32m,
+    hash160
 };
 
 /**
@@ -46,6 +51,9 @@ export const doubleSha256 = (message) => {
  * @property {typeof fromJSON} fromJSON
  * @property {typeof toJSON} toJSON
  * @property {typeof doubleSha256} doubleSha256
+ * @property {typeof bech32} bech32
+ * @property {typeof bech32m} bech32m
+ * @property {typeof hash160} hash160
  */
 
 /** @type {Utils} */
@@ -73,7 +81,12 @@ export const utils = {
     toJSON,
     
     // Hash utilities
-    doubleSha256
+    doubleSha256,
+    hash160,
+    
+    // Address encoding
+    bech32,
+    bech32m
 };
 
 export default utils; 
