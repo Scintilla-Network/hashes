@@ -10,8 +10,8 @@ describe('BLAKE2s', () => {
     });
 
     it('should hash with custom output length', () => {
-        const hash16 = blake2s(TEST_VECTOR.message, 16);
-        const hash24 = blake2s(TEST_VECTOR.message, 24);
+        const hash16 = blake2s(TEST_VECTOR.message, { dkLen: 16 });
+        const hash24 = blake2s(TEST_VECTOR.message, { dkLen: 24 });
         expect(hash16.length).toBe(16);
         expect(hash24.length).toBe(24);
     });

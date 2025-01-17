@@ -4,6 +4,9 @@ import { k12, m14 } from './kangaroo.js';
 import { blake3 } from './blake3.js';
 import { turboshake128, turboshake256 } from './turboshake.js';
 
+const keccak = sha3_256;
+
+// Create namespace object
 export const pq = {
     // NIST recommended
     sha3_256,
@@ -20,11 +23,15 @@ export const pq = {
     turboshake128,
     turboshake256,
     
+    // Alias Keccak
+    keccak,
+    
     // Recommended defaults
     recommended: sha3_512,    // Most secure
     fast: k12               // Best performance while maintaining security
 };
 
+// Individual exports
 export {
     // NIST recommended
     sha3_256,
@@ -39,7 +46,11 @@ export {
     
     // Additional variants
     turboshake128,
-    turboshake256
+    turboshake256,
+    
+    // Alias
+    keccak
 };
 
+// Default export
 export default pq; 

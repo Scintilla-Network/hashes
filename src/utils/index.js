@@ -7,56 +7,16 @@ import { fromJSON, toJSON } from './json.js';
 import { formatMessage, formatMessageHash } from './format.js';
 import { bech32, bech32m } from './bech32.js';
 import { hash160 } from './hash160.js';
-
-// Re-export individual utilities
-export { 
-    bytesToHex,
-    randomBytes,
-    toHex,
-    fromHex,
-    isHexString,
-    isUint8Array,
-    formatMessage,
-    formatMessageHash,
-    fromUtf8,
-    toUtf8,
-    fromJSON,
-    toJSON,
-    bech32,
-    bech32m,
-    hash160
-};
+import { hmac, createHmac } from './hmac.js';
+import { hkdf, extract as hkdfExtract, expand as hkdfExpand } from './hkdf.js';
+import { pbkdf2, pbkdf2Async } from './pbkdf2.js';
+import { scrypt, scryptAsync } from './scrypt.js';
 
 /**
- * Performs Bitcoin's double SHA256 hash
- * @param {string | Uint8Array | Record<string, unknown>} message - Message to hash
- * @returns {Uint8Array} 32-byte double SHA256 hash
- */
-export const doubleSha256 = (message) => {
-    return sha256(sha256(formatMessage(message)));
-};
-
-/**
- * @typedef {object} Utils
- * @property {typeof bytesToHex} bytesToHex
- * @property {typeof randomBytes} randomBytes
- * @property {typeof toHex} toHex
- * @property {typeof fromHex} fromHex
- * @property {typeof isHexString} isHexString
- * @property {typeof isUint8Array} isUint8Array
- * @property {typeof formatMessage} formatMessage
- * @property {typeof formatMessageHash} formatMessageHash
- * @property {typeof fromUtf8} fromUtf8
- * @property {typeof toUtf8} toUtf8
- * @property {typeof fromJSON} fromJSON
- * @property {typeof toJSON} toJSON
- * @property {typeof doubleSha256} doubleSha256
- * @property {typeof bech32} bech32
- * @property {typeof bech32m} bech32m
- * @property {typeof hash160} hash160
+ * @typedef {string | Uint8Array | Record<string, unknown>} HashInput
  */
 
-/** @type {Utils} */
+// Create namespace object
 export const utils = {
     // From @noble/hashes
     bytesToHex,
@@ -81,12 +41,75 @@ export const utils = {
     toJSON,
     
     // Hash utilities
-    doubleSha256,
     hash160,
+    /** @type {(message: HashInput) => Uint8Array} */
+    doubleSha256: (message) => sha256(sha256(formatMessage(message))),
+    
+    // Key derivation
+    hmac,
+    createHmac,
+    hkdf,
+    hkdfExtract,
+    hkdfExpand,
+    pbkdf2,
+    pbkdf2Async,
+    scrypt,
+    scryptAsync,
     
     // Address encoding
     bech32,
     bech32m
 };
 
+// Individual exports
+export {
+    // From @noble/hashes
+    bytesToHex,
+    randomBytes,
+    
+    // Local implementations
+    toHex,
+    fromHex,
+    isHexString,
+    isUint8Array,
+    
+    // Format utilities
+    formatMessage,
+    formatMessageHash,
+    
+    // UTF-8 utilities
+    fromUtf8,
+    toUtf8,
+    
+    // JSON utilities
+    fromJSON,
+    toJSON,
+    
+    // Hash utilities
+    hash160,
+    
+    // Key derivation
+    hmac,
+    createHmac,
+    hkdf,
+    hkdfExtract,
+    hkdfExpand,
+    pbkdf2,
+    pbkdf2Async,
+    scrypt,
+    scryptAsync,
+    
+    // Address encoding
+    bech32,
+    bech32m
+};
+
+/**
+ * Performs Bitcoin's double SHA256 hash
+ * @param {HashInput} message - Message to hash
+ * @returns {Uint8Array} 32-byte double SHA256 hash
+ */
+export const doubleSha256 = (message) => sha256(sha256(formatMessage(message)));
+
+// Default export
 export default utils; 

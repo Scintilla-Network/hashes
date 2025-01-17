@@ -1,5 +1,8 @@
-export interface HashFunction {
-    (data: string | Uint8Array): Uint8Array;
+import { HashFunction } from "../types.js";
+
+export interface HMAC {
+    update(message: Uint8Array): HMAC;
+    digest(): Uint8Array;
 }
 
 export const bytesToHex: (bytes: Uint8Array) => string;
@@ -15,7 +18,24 @@ export const toUtf8: (bytes: Uint8Array) => string;
 export const fromJSON: (json: string) => any;
 export const toJSON: (data: any) => string;
 export const hash160: HashFunction;
-export const doubleSha256: HashFunction;
+
+// HMAC functions
+export const hmac: (hash: HashFunction, key: string | Uint8Array, message: string | Uint8Array) => Uint8Array;
+export const createHmac: (hash: HashFunction, key: string | Uint8Array) => HMAC;
+
+// HKDF functions
+export const hkdf: (hash: HashFunction, inputKey: string | Uint8Array, salt: string | Uint8Array, info: string | Uint8Array, length: number) => Uint8Array;
+export const hkdfExtract: (hash: HashFunction, inputKey: string | Uint8Array, salt: string | Uint8Array) => Uint8Array;
+export const hkdfExpand: (hash: HashFunction, prk: string | Uint8Array, info: string | Uint8Array, length: number) => Uint8Array;
+
+// PBKDF2 functions
+export interface PBKDF2Options {
+    c: number;
+    dkLen: number;
+}
+
+export const pbkdf2: (hash: HashFunction, password: string | Uint8Array, salt: string | Uint8Array, options: PBKDF2Options) => Uint8Array;
+export const pbkdf2Async: (hash: HashFunction, password: string | Uint8Array, salt: string | Uint8Array, options: PBKDF2Options) => Promise<Uint8Array>;
 
 export const bech32: {
     encode: (prefix: string, words: number[]) => string;

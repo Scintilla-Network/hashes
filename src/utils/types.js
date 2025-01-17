@@ -1,4 +1,9 @@
 /**
+ * Type checking utilities
+ * @module
+ */
+
+/**
  * Checks if a value is a valid hex string
  * @param {unknown} value - Value to check
  * @returns {boolean} True if value is a valid hex string
@@ -20,4 +25,10 @@ export function isHexString(value) {
  */
 export function isUint8Array(value) {
     return value instanceof Uint8Array;
-} 
+}
+
+// Default export for consistency with our module structure
+export default {
+    isHexString,
+    isUint8Array
+}; 

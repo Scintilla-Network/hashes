@@ -13,6 +13,7 @@ export const turboshake128: HashFunction;
 export const turboshake256: HashFunction;
 export const recommended: HashFunction;
 export const fast: HashFunction;
+export const keccak: HashFunction;
 
 declare const pq: {
     sha3_256: HashFunction;
@@ -24,6 +25,7 @@ declare const pq: {
     blake3: HashFunction;
     turboshake128: HashFunction;
     turboshake256: HashFunction;
+    keccak: HashFunction;
     recommended: HashFunction;
     fast: HashFunction;
 };

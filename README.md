@@ -8,6 +8,7 @@ Provides both classical crypto hashes and quantum-resistant alternatives.
 - 🔒 Classic Crypto hash functions (SHA256, SHA512, RIPEMD160, BLAKE2) - Block hash
 - 🛡️ Quantum-resistant hash functions (SHA3, SHAKE, K12) - Post-quantum replacements
 - ⚡ High-performance alternatives (BLAKE3, TurboSHAKE)
+- 🔑 Key derivation functions (HMAC, HKDF, PBKDF2)
 - 🏦 Blockchain utilities (Hash160, Bech32/Bech32m encoding)
 - 🔬 Audited code (uses noble-hashes library, fixed versions, audited by Scintilla Network)
 - 0️⃣ Zero dependencies beyond noble-hashes
@@ -149,6 +150,90 @@ const doubleHash = doubleSha256('message');  // Bitcoin's double SHA256
 const hash160Result = hash160(publicKey);    // Address hash
 const address = bech32.encode('prefix', words); // Address encoding
 ```
+
+### Key Derivation Functions
+
+```javascript
+import { 
+    hmac, createHmac,     // HMAC for message authentication
+    hkdf,                 // HKDF for key derivation
+    pbkdf2, pbkdf2Async,  // PBKDF2 for password hashing
+    scrypt, scryptAsync   // Scrypt for memory-hard password hashing
+} from '@scintilla-network/hashes/utils';
+import { sha256 } from '@scintilla-network/hashes/classic';
+
+// HMAC - Hash-based Message Authentication Code
+const hmacValue = hmac(sha256, 'key', 'message');
+
+// Streaming HMAC for large messages
+const hmacInstance = createHmac(sha256, 'key');
+hmacInstance.update(new Uint8Array([1, 2, 3]));
+const hmacResult = hmacInstance.digest();
+
+// HKDF - HMAC-based Key Derivation Function
+const salt = randomBytes(32);
+const info = 'application info';
+const derivedKey = hkdf(sha256, 'input key', salt, info, 32);
+
+// HKDF extract/expand steps separately
+const prk = hkdfExtract(sha256, 'input key', salt);
+const expandedKey = hkdfExpand(sha256, prk, info, 32);
+
+// PBKDF2 - Password-Based Key Derivation Function 2
+const pbkdf2Key = pbkdf2(sha256, 'password', 'salt', { 
+    c: 10000,    // iterations
+    dkLen: 32    // output length
+});
+
+// Async PBKDF2 for better UI responsiveness
+const pbkdf2KeyAsync = await pbkdf2Async(sha256, 'password', 'salt', { 
+    c: 10000, 
+    dkLen: 32 
+});
+
+// Scrypt - Memory-hard password hashing
+const scryptKey = scrypt('password', 'salt', {
+    N: 2**16,    // CPU/memory cost (must be power of 2)
+    r: 8,        // block size
+    p: 1,        // parallelization
+    dkLen: 32    // output length
+});
+
+// Async Scrypt with progress reporting
+const scryptKeyAsync = await scryptAsync('password', 'salt', {
+    N: 2**16,
+    r: 8,
+    p: 1,
+    dkLen: 32,
+    onProgress: (progress) => console.log(`${progress * 100}% complete`)
+});
+```
+
+### Key Derivation Security Notes
+
+#### PBKDF2
+- Recommended for FIPS compliance
+- Use at least 10,000 iterations (`c: 10000`)
+- Not memory-hard, vulnerable to hardware acceleration
+
+#### Scrypt
+- Memory-hard, resistant to hardware acceleration
+- Recommended parameters:
+  - `N`: 2^16 to 2^20 (CPU/memory cost)
+  - `r`: 8 (block size)
+  - `p`: 1 (parallelization)
+- Memory usage = 128 * N * r * p bytes
+- Supports up to 4GB RAM usage (N=2^22)
+
+#### HKDF
+- Best for deriving multiple keys from a strong input key
+- Not suitable for password hashing (use PBKDF2 or Scrypt instead)
+- Always use a random salt
+
+#### HMAC
+- For message authentication and as building block for HKDF/PBKDF2
+- Key should be random and at least as long as hash output
+- Resistant to length extension attacks
 
 ## Input Types
 

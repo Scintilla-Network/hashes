@@ -1,6 +1,4 @@
-export interface HashFunction {
-    (data: string | Uint8Array): Uint8Array;
-}
+import { HashFunction } from '../types.js';
 
 export const sha256: HashFunction;
 export const sha512: HashFunction;
