@@ -1,9 +1,15 @@
 {
   "name": "@scintilla-network/hashes",
-  "version": "1.0.0-beta.5",
-  "description": "Enhanced hash functions for scintilla and broader crypto / blockchain use",
+  "version": "1.0.0-beta.6",
+  "description": "Enhanced hash functions for Scintilla and broader crypto / blockchain use",
   "type": "module",
   "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./classic": "./src/classic/index.js",
+    "./pq": "./src/pq/index.js",
+    "./utils": "./src/utils/index.js"
+  },
   "files": [
     "src",
     "README.md",
@@ -11,7 +17,6 @@
   ],
   "scripts": {
     "test": "vitest run",
-    "test:watch": "vitest src/utils/bech32.spec.js",
     "typecheck": "tsc",
     "prepublishOnly": "npm run test"
   },
