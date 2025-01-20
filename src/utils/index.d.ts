@@ -51,6 +51,20 @@ export const bech32m: {
     fromWords: (words: number[]) => Uint8Array;
 };
 
+export interface Base58Check {
+    encode(data: Uint8Array): string;
+    decode(str: string): Uint8Array;
+}
+
+// Base58 functions
+export const base58: {
+    encode(data: Uint8Array): string;
+    decode(str: string): Uint8Array;
+};
+
+// Base58Check functions
+export const base58check: Base58Check;
+
 declare const utils: {
     bytesToHex: (bytes: Uint8Array) => string;
     randomBytes: (length: number) => Uint8Array;
@@ -68,6 +82,8 @@ declare const utils: {
     doubleSha256: HashFunction;
     bech32: typeof bech32;
     bech32m: typeof bech32m;
+    base58: typeof base58;
+    base58check: Base58Check;
 };
 
 export default utils; 

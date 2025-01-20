@@ -11,7 +11,8 @@ import { hmac, createHmac } from './hmac.js';
 import { hkdf, extract as hkdfExtract, expand as hkdfExpand } from './hkdf.js';
 import { pbkdf2, pbkdf2Async } from './pbkdf2.js';
 import { scrypt, scryptAsync } from './scrypt.js';
-
+import base58 from './base58.js';
+import base58check from './base58check.js';
 /**
  * @typedef {string | Uint8Array | Record<string, unknown>} HashInput
  */
@@ -58,7 +59,9 @@ export const utils = {
     
     // Address encoding
     bech32,
-    bech32m
+    bech32m,
+    base58,
+    base58check,
 };
 
 // Individual exports
@@ -101,7 +104,9 @@ export {
     
     // Address encoding
     bech32,
-    bech32m
+    bech32m,
+    base58,
+    base58check,
 };
 
 /**
