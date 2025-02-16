@@ -13,6 +13,7 @@ import { pbkdf2, pbkdf2Async } from './pbkdf2.js';
 import { scrypt, scryptAsync } from './scrypt.js';
 import base58 from './base58.js';
 import base58check from './base58check.js';
+import createBase58check from './createCustomBase58check.js';
 /**
  * @typedef {string | Uint8Array | Record<string, unknown>} HashInput
  */
@@ -107,6 +108,7 @@ export {
     bech32m,
     base58,
     base58check,
+    createBase58check,
 };
 
 /**

@@ -64,6 +64,7 @@ export const base58: {
 
 // Base58Check functions
 export const base58check: Base58Check;
+export function createBase58check(hashFunction?: HashFunction): Base58Check;
 
 declare const utils: {
     bytesToHex: (bytes: Uint8Array) => string;
@@ -84,6 +85,7 @@ declare const utils: {
     bech32m: typeof bech32m;
     base58: typeof base58;
     base58check: Base58Check;
+    createBase58check: typeof createBase58check;
 };
 
 export default utils; 
