@@ -1,10 +1,11 @@
-import { sha3_256, sha3_512 } from './sha3.js';
+import { sha3_256, sha3_512, keccak_256 } from './sha3.js';
 import { shake128, shake256 } from './shake.js';
 import { k12, m14 } from './kangaroo.js';
 import { blake3 } from './blake3.js';
 import { turboshake128, turboshake256 } from './turboshake.js';
 
 const keccak = sha3_256;
+const keccak256 = keccak_256;
 
 // Create namespace object
 export const pq = {
@@ -25,6 +26,7 @@ export const pq = {
     
     // Alias Keccak
     keccak,
+    keccak256,
     
     // Recommended defaults
     recommended: sha3_512,    // Most secure
@@ -49,7 +51,8 @@ export {
     turboshake256,
     
     // Alias
-    keccak
+    keccak,
+    keccak256
 };
 
 // Default export

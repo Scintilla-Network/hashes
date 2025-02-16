@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { describe, it, expect } from 'vitest';
 import { createBase58check } from './base58check.js';
 import { sha256 } from '../classic/index.js';
 

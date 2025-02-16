@@ -1,4 +1,8 @@
-import { sha3_256 as nobleSha3_256, sha3_512 as nobleSha3_512 } from '@noble/hashes/sha3';
+import { 
+    sha3_256 as nobleSha3_256,
+    sha3_512 as nobleSha3_512,
+    keccak_256 as nobleKeccak_256
+ } from '@noble/hashes/sha3';
 import { formatMessage } from '../utils/format.js';
 
 /**
@@ -37,4 +41,18 @@ sha3_512Function.create = nobleSha3_512.create;
 
 export const sha3_512 = sha3_512Function;
 
-export default { sha3_256, sha3_512 }; 
+/**
+ * Computes Keccak-256 hash of a message
+ * @param {import('../types.js').Input} message - Message to hash
+ * @returns {Uint8Array} 32-byte Keccak-256 hash
+ */
+const keccak_256Function = (message) => {
+    return nobleKeccak_256(formatMessage(message));
+};
+
+keccak_256Function.outputLen = nobleKeccak_256.outputLen;
+keccak_256Function.blockLen = nobleKeccak_256.blockLen;
+keccak_256Function.create = nobleKeccak_256.create;
+
+export const keccak_256 = keccak_256Function; 
+export default { sha3_256, sha3_512, keccak_256 }; 
