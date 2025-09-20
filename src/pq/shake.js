@@ -1,4 +1,4 @@
-import { shake128 as nobleShake128, shake256 as nobleShake256 } from '@noble/hashes/sha3';
+import { shake128 as nobleShake128, shake256 as nobleShake256 } from '@noble/hashes/sha3.js';
 import { formatMessage } from '../utils/format.js';
 
 /**

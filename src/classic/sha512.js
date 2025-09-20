@@ -1,4 +1,4 @@
-import { sha512 as nobleSha512 } from '@noble/hashes/sha512';
+import { sha512 as nobleSha512 } from '@noble/hashes/sha2.js';
 import { formatMessage } from '../utils/format.js';
 
 /**

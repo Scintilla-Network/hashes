@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from '@scintilla-network/litest';
 import { hash160 } from './hash160.js';
 
 describe('hash160', () => {

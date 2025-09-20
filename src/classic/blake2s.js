@@ -1,4 +1,4 @@
-import { blake2s as nobleBlake2s } from '@noble/hashes/blake2s';
+import { blake2s as nobleBlake2s } from '@noble/hashes/blake2.js';
 import { formatMessage } from '../utils/format.js';
 
 /**

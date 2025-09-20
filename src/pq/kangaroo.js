@@ -1,4 +1,4 @@
-import { k12 as nobleK12, m14 as nobleM14 } from '@noble/hashes/sha3-addons';
+import { kt128 as nobleK12, kt256 as nobleM14 } from '@noble/hashes/sha3-addons.js';
 import { formatMessage } from '../utils/format.js';
 
 /**

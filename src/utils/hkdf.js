@@ -1,4 +1,4 @@
-import * as nobleHkdf from '@noble/hashes/hkdf';
+import * as nobleHkdf from '@noble/hashes/hkdf.js';
 
 /**
  * Derives a key using HKDF

@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from '@scintilla-network/litest';
 import { isHexString, isUint8Array } from './types.js';
 
 describe('Type Checking Utilities', () => {

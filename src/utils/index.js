@@ -1,5 +1,5 @@
-import { bytesToHex, randomBytes } from '@noble/hashes/utils';
-import { sha256 } from '@noble/hashes/sha256';
+import { bytesToHex, randomBytes } from '@noble/hashes/utils.js';
+import { sha256 } from '@noble/hashes/sha2.js';
 import { toHex, fromHex } from './hex.js';
 import { isHexString, isUint8Array } from './types.js';
 import { fromUtf8, toUtf8 } from './utf8.js';

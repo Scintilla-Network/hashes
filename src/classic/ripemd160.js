@@ -1,4 +1,4 @@
-import { ripemd160 as nobleRipemd160 } from '@noble/hashes/ripemd160';
+import { ripemd160 as nobleRipemd160 } from '@noble/hashes/legacy.js';
 import { formatMessage } from '../utils/format.js';
 
 /**

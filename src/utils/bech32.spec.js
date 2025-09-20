@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from '@scintilla-network/litest';
 import { bech32, bech32m } from './bech32.js';
 
 describe('bech32', () => {

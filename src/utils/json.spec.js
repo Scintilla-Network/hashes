@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from '@scintilla-network/litest';
 import { fromJSON, toJSON } from './json.js';
 
 describe('JSON Utilities', () => {

@@ -1,4 +1,4 @@
-import { pbkdf2 as noblePbkdf2, pbkdf2Async as noblePbkdf2Async } from '@noble/hashes/pbkdf2';
+import { pbkdf2 as noblePbkdf2, pbkdf2Async as noblePbkdf2Async } from '@noble/hashes/pbkdf2.js';
 
 /**
  * Derives a key using PBKDF2

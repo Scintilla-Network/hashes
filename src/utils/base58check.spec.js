@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from '@scintilla-network/litest';
 import { createBase58check } from './base58check.js';
 import { sha256 } from '../classic/index.js';
 
@@ -20,27 +20,27 @@ describe('base58check', () => {
     });
 
     it('should throw on invalid input for encode', () => {
-        expect(() => base58check.encode('invalid')).to.throw('Input must be Uint8Array');
-        expect(() => base58check.encode(null)).to.throw('Input must be Uint8Array');
+        expect(() => base58check.encode('invalid')).toThrow('Input must be Uint8Array');
+        expect(() => base58check.encode(null)).toThrow('Input must be Uint8Array');
     });
 
     it('should throw on invalid input for decode', () => {
-        expect(() => base58check.decode(123)).to.throw('Input must be string');
-        expect(() => base58check.decode(null)).to.throw('Input must be string');
+        expect(() => base58check.decode(123)).toThrow('Input must be string');
+        expect(() => base58check.decode(null)).toThrow('Input must be string');
     });
 
     it('should throw on invalid base58 characters', () => {
-        expect(() => base58check.decode('invalid0')).to.throw('Invalid base58 character');
+        expect(() => base58check.decode('invalid0')).toThrow('Invalid base58 character');
     });
 
     it('should throw on invalid checksum', () => {
         const testData = new Uint8Array([0x00, 0x01, 0x02, 0x03, 0x04]);
         const encoded = base58check.encode(testData);
         const corrupted = encoded.slice(0, -1) + '1';
-        expect(() => base58check.decode(corrupted)).to.throw('Invalid checksum');
+        expect(() => base58check.decode(corrupted)).toThrow('Invalid checksum');
     });
 
     it('should throw on invalid hash function', () => {
-        expect(() => createBase58check('not a function')).to.throw('Hash function must be a function');
+        expect(() => createBase58check('not a function')).toThrow('Hash function must be a function');
     });
 }); 

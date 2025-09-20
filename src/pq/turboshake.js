@@ -1,4 +1,4 @@
-import { turboshake128 as nobleTurbo128, turboshake256 as nobleTurbo256 } from '@noble/hashes/sha3-addons';
+import { turboshake128 as nobleTurbo128, turboshake256 as nobleTurbo256 } from '@noble/hashes/sha3-addons.js';
 import { formatMessage } from '../utils/format.js';
 
 /**

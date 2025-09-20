@@ -2,7 +2,7 @@ import {
     sha3_256 as nobleSha3_256,
     sha3_512 as nobleSha3_512,
     keccak_256 as nobleKeccak_256
- } from '@noble/hashes/sha3';
+ } from '@noble/hashes/sha3.js';
 import { formatMessage } from '../utils/format.js';
 
 /**

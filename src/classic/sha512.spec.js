@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from '@scintilla-network/litest';
 import { sha512 } from './sha512.js';
 import { TEST_VECTOR } from '../test/vectors.js';
 

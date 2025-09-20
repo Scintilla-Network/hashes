@@ -1,4 +1,4 @@
-import { utf8ToBytes as fromUtf8Str } from '@noble/hashes/utils';
+import { utf8ToBytes as fromUtf8Str } from '@noble/hashes/utils.js';
 import { isUint8Array } from './types.js';
 
 /**

@@ -5,14 +5,14 @@ Provides both classical crypto hashes and quantum-resistant alternatives.
 
 ## Features
 
-- 🔒 Classic Crypto hash functions (SHA256, SHA512, RIPEMD160, BLAKE2) - Block hash
-- 🛡️ Quantum-resistant hash functions (SHA3, SHAKE, K12) - Post-quantum replacements
-- ⚡ High-performance alternatives (BLAKE3, TurboSHAKE)
-- 🔑 Key derivation functions (HMAC, HKDF, PBKDF2)
-- 🏦 Blockchain utilities (Hash160, Bech32/Bech32m encoding)
-- 🔬 Audited code (uses noble-hashes library, fixed versions, audited by Scintilla Network)
-- 0️⃣ Zero dependencies beyond noble-hashes
-- 🎯 Flexible input handling (strings, hex, JSON, Uint8Array)
+- Classic Crypto hash functions (SHA256, SHA512, RIPEMD160, BLAKE2) - Block hash
+- Quantum-resistant hash functions (SHA3, SHAKE, K12) - Post-quantum replacements
+- High-performance alternatives (BLAKE3, TurboSHAKE)
+- Key derivation functions (HMAC, HKDF, PBKDF2)
+- Blockchain utilities (Hash160, Bech32/Bech32m encoding)
+- Audited code (uses noble-hashes library, fixed versions)
+- Zero dependencies beyond noble-hashes
+- Flexible input handling (strings, hex, JSON, Uint8Array)
 
 ## Installation
 
@@ -25,7 +25,6 @@ npm install @scintilla-network/hashes
 ### Basic Usage
 
 ```javascript
-// Direct imports (recommended)
 import { sha3_512, k12 } from '@scintilla-network/hashes/pq';
 import { sha256 } from '@scintilla-network/hashes/classic';
 
@@ -212,11 +211,13 @@ const scryptKeyAsync = await scryptAsync('password', 'salt', {
 ### Key Derivation Security Notes
 
 #### PBKDF2
+
 - Recommended for FIPS compliance
 - Use at least 10,000 iterations (`c: 10000`)
 - Not memory-hard, vulnerable to hardware acceleration
 
 #### Scrypt
+
 - Memory-hard, resistant to hardware acceleration
 - Recommended parameters:
   - `N`: 2^16 to 2^20 (CPU/memory cost)
@@ -226,11 +227,13 @@ const scryptKeyAsync = await scryptAsync('password', 'salt', {
 - Supports up to 4GB RAM usage (N=2^22)
 
 #### HKDF
+
 - Best for deriving multiple keys from a strong input key
 - Not suitable for password hashing (use PBKDF2 or Scrypt instead)
 - Always use a random salt
 
 #### HMAC
+
 - For message authentication and as building block for HKDF/PBKDF2
 - Key should be random and at least as long as hash output
 - Resistant to length extension attacks
@@ -238,6 +241,7 @@ const scryptKeyAsync = await scryptAsync('password', 'salt', {
 ## Input Types
 
 All hash functions accept the following input types:
+
 - Strings (UTF-8 encoded)
 - Hex strings (e.g., 'deadbeef')
 - JSON objects (automatically stringified)
@@ -248,13 +252,16 @@ All hash functions return a `Uint8Array` of the appropriate length.
 ## Security Considerations
 
 ### Post-Quantum Security
+
 - Uses SHA3-512 as the recommended default (NIST approved)
 - Provides K12 as a high-performance alternative
 - All implementations from audited noble-hashes library
 - Follows Australian ASD guidelines (prohibiting SHA256 after 2030)
 
 ### Quantum Impact
+
 Grover's algorithm could reduce hash security from 2^n to 2^n/2 operations:
+
 - SHA256 (256-bit) → 128-bit security
 - SHA3-512 (512-bit) → 256-bit security
 - SHAKE256 (variable) → n/2-bit security
@@ -262,6 +269,7 @@ Grover's algorithm could reduce hash security from 2^n to 2^n/2 operations:
 ## Performance Comparison
 
 Relative performance on typical hardware:
+
 ```
 Fastest → Slowest
 K12 > BLAKE3 > SHA256 > SHAKE > SHA3-512
@@ -270,11 +278,13 @@ K12 > BLAKE3 > SHA256 > SHAKE > SHA3-512
 ## Dependencies
 
 - noble-hashes: Audited, zero-dependency cryptographic library
-- All dependency versions are fixed for supply chain security
 
 ## License
 
 MIT License - see LICENSE file for details.
 
 ## Related Packages
+
 - [@scintilla-network/signatures](https://github.com/Scintilla-Network/signatures): Post-quantum signatures and key exchanges
+- [@scintilla-network/ciphers](https://github.com/Scintilla-Network/ciphers): Ciphers encryption and decryption
+- [@scintilla-network/mnemonic](https://github.com/Scintilla-Network/mnemonic): Mnemonics phrase generation and derivation
